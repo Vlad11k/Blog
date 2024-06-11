@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<nav class="navigation-menu">
+    <a href="{{ url_for('blog') }}">Блог</a>
+    <a href="{{ url_for('add_post') }}">Добавить новость</a>
+    <a href="{{ url_for('about') }}">О сайте</a>
+</nav>
+<div>
+    {% block content%} {% endblock %}
+</div>
+</body>
+</html>
