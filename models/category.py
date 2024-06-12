@@ -17,3 +17,10 @@ class Category(Base):
 
     def __repr__(self):
         return f'{self.id} - {self.name}'
+
+    @staticmethod
+    def getCategoryValues():
+        res = [(i[0], i[1]) for i in db.session.execute(select(Category.id, Category.name))]
+        return res
+
+

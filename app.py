@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 
 from config import Config
+from forms import AddPostForm
+from models import category
 
 config = Config
 
@@ -27,7 +29,10 @@ def post(post_name=None):
 
 @app.route('/add_post')
 def add_post():
-    return render_template('add_post.html', title='Добавить пост')
+    categories = category.Category.getCategoryValues()
+    form = AddPostForm()
+    form.category.choices = categories
+    return render_template('add_post.html', title='Добавить пост', form=form)
 
 
 @app.route('/about')
