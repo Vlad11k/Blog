@@ -1,6 +1,8 @@
+import datetime
+
 from app import db
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String
+from sqlalchemy import String, text
 
 
 class Post(db.Model):
@@ -10,4 +12,9 @@ class Post(db.Model):
     slug: Mapped[str] = mapped_column(String(255), unique=True)
     content: Mapped[str]
     photo: Mapped[str] = mapped_column(String(255))
+    created_at: Mapped[datetime.datetime] = mapped_column(
+                server_default=text("TIMEZONE('utc', now())"))
+    updated_at: Mapped[datetime.datetime] = mapped_column(
+                server_default=text("TIMEZONE('utc', now())"),
+                onupdate=datetime.datetime.utcnow())
     is_published: Mapped[bool] = mapped_column(default=True)

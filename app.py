@@ -11,11 +11,14 @@ app.config.from_object(config)
 db = SQLAlchemy(app)
 
 from models.post import Post
+from models.category import Category
+
 
 
 @app.route('/')
 def home():
-
+    with app.app_context():
+        db.create_all()
     return render_template('home.html', title='Домашняя страница')
 
 
