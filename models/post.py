@@ -2,7 +2,7 @@ import datetime
 
 from app import db
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import String, text
+from sqlalchemy import String, text, ForeignKey
 
 
 class Post(db.Model):
@@ -18,3 +18,8 @@ class Post(db.Model):
                 server_default=text("TIMEZONE('utc', now())"),
                 onupdate=datetime.datetime.utcnow())
     is_published: Mapped[bool] = mapped_column(default=True)
+
+    category_id: Mapped[int] = mapped_column(ForeignKey('category.id'))
+
+    def __repr__(self):
+        return f'{self.id} - {self.title}'
