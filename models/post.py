@@ -1,11 +1,12 @@
 import datetime
 
-from app import db
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String, text, ForeignKey
 
+from models.models import Base
 
-class Post(db.Model):
+
+class Post(Base):
     __tablename__ = 'posts'
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(50))
